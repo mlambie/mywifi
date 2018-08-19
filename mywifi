@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
-ssid = ARGV[0]
+ssid = ARGV[0].to_s.strip
+abort "Missing SSID" if ssid.to_s.length == 0
 
 if `uname`.strip! == 'Darwin' then
 	wifi = `/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | grep ' SSID' | cut -d':' -f2`.to_s.strip!
