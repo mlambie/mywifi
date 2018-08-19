@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+ssid = ARGV[0]
+
+if `uname`.strip! == 'Darwin' then
+	wifi = `/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | grep ' SSID' | cut -d':' -f2`.to_s.strip!
+	abort "WIFI: #{wifi} vs SSID: #{ssid}" if (wifi != ssid)
+else
+	abort "Not on MacOS"
+end
